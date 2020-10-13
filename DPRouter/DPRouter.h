@@ -15,11 +15,12 @@ FOUNDATION_EXPORT const unsigned char DPRouterVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <DPRouter/PublicHeader.h>
 
-#import <DPRouter/DPRouterResource.h>
-#import <DPRouter/DPRouterResourceBuilder.h>
-#import <DPRouter/DPRouterImplement.h>
-#import <DPRouter/DPRouterClosureResourceBuilder.h>
-#import <DPRouter/DPRouterPageBuilder.h>
+#import "DPRouterResource.h"
+#import "DPRouterResourceBuilder.h"
+#import "DPRouterImplement.h"
 
-#import <DPRouter/NSString+DPRouterConvenient.h>
-#import <DPRouter/NSURL+DPRouterConvenient.h>
+#import "DPRouterClosureResourceBuilder.h"
+#import "DPRouterPageBuilder.h"
+
+#import "NSString+DPRouterConvenient.h"
+#import "NSURL+DPRouterConvenient.h"

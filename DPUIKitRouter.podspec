@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "DPRouter"
+  spec.name         = "DPUIKitRouter"
   spec.version      = "1.0.0"
   spec.summary      = "UIKit的路由工具"
 
@@ -89,6 +89,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "DPRouter/Sources", "DPRouter/Sources/**/*.{h,m,swift}", "DPRouter/DPRouter.h"
+  spec.swift_version = '5.3'
+  
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

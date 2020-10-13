@@ -1,0 +1,28 @@
+PODS:
+  - DPLog (2.0)
+  - DPMessageBus (1.0.1)
+  - DPModuleManager (1.0.1):
+    - DPLog (~> 2.0.0)
+    - DPMessageBus (~> 1.0.0)
+    - DPObjCRuntime (~> 1.0.0)
+  - DPObjCRuntime (1.0)
+
+DEPENDENCIES:
+  - DPModuleManager
+
+SPEC REPOS:
+  trunk:
+    - DPLog
+    - DPMessageBus
+    - DPModuleManager
+    - DPObjCRuntime
+
+SPEC CHECKSUMS:
+  DPLog: 820205ee14c28edd9dcebc7e39b94231aa9630fb
+  DPMessageBus: 2e793eeb2ace5ec5fe3218f924f8021674a410ec
+  DPModuleManager: a9b7711ff53ad72be9b41b8a0716fd43bcbddc67
+  DPObjCRuntime: f32a795f50de1cebf49545850dde94f1f7d67b2f
+
+PODFILE CHECKSUM: a922f99b260624e9912cdcb4976a9935e1884659
+
+COCOAPODS: 1.9.3

@@ -21,7 +21,7 @@ dependencies: [
 在`Podfile`文件中加入
 
 ```ruby
-pod 'DPRouter', '~> 1.0.0'
+pod 'DPUIKitRouter', '~> 1.0.0'
 ```
 
 ## 使用

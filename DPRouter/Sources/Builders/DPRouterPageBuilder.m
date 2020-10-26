@@ -27,18 +27,11 @@
 
 @implementation DPRouter (DPRouterPageBuilder)
 
-- (void)registerPage:(Class)pageType {
+- (void)registerPage:(Class)pageType forURL:(NSURL *)url {
     
-    // 未实现DPRouterPage不进行注册
-    if ([pageType respondsToSelector:@selector(pageURL)] == NO ||
-        [pageType respondsToSelector:@selector(pageForURL:)] == NO) {
-        NSLog(@"%@", [NSString stringWithFormat:@"%@: 页面类型不符合`DPRouterPage`协议", pageType]);
-        return;
-    }
-
-    NSURL *url = [pageType pageURL];
-    if (url == nil) {
-        NSLog(@"%@", [NSString stringWithFormat:@"%@: 页面类型返回的URL不能为空", pageType]);
+    // 如果没有遵循DPRouterPageProvider协议，则不进行注册
+    if ([pageType conformsToProtocol:@protocol(DPRouterPageProvider)] == NO) {
+        NSLog(@"pageType需要遵循`DPRouterPageProvider`协议");
         return;
     }
     
@@ -54,5 +47,9 @@
     
     return nil;
 }
+
+@end
+
+@implementation UIViewController (DPRouterResource)
 
 @end

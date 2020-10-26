@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TopicListViewController : UIViewController <DPRouterPage>
+@interface TopicListViewController : UIViewController <DPRouterPageProvider>
 
 @end
 

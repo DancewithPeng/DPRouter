@@ -17,10 +17,6 @@
     [super viewDidLoad];    
 }
 
-+ (NSURL *)pageURL {
-    return @"sub.myhost.com/topics".URL;
-}
-
 + (__kindof UIViewController *)pageForURL:(NSURL *)url {
     
     TopicListViewController *topicPage = [[TopicListViewController alloc] initWithNibName:@"TopicListViewController" bundle:[NSBundle bundleForClass:TopicListViewController.class]];

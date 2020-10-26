@@ -13,6 +13,6 @@ class QuestionModule: Module {
     override func didLoad() {
         super.didLoad()
         
-        DPRouter.shared.register(QuestionListViewController.self)
+        DPRoute("sub.myhost.com/questions", QuestionListViewController.self)
     }
 }

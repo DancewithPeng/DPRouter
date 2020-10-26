@@ -13,7 +13,8 @@ class ArticleModule: Module {
     
     override func didLoad() {
         super.didLoad()
-        DPRouter.shared.register(ArticleListViewController.self)
-        DPRouter.shared.register(ArticleDetailViewController.self)
+        
+        DPRoute("sub.myhost.com/articles", ArticleListViewController.self)
+        DPRoute("sub.myhost.com/articles/detail", ArticleDetailViewController.self)
     }
 }

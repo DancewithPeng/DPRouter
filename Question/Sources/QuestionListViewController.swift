@@ -17,11 +17,7 @@ class QuestionListViewController: UIViewController {
     }
 }
 
-extension QuestionListViewController: DPRouterPage {    
-    
-    static var pageURL: URL {
-        return URL(string: "sub.myhost.com/questions")!
-    }
+extension QuestionListViewController: DPRouterPageProvider {        
     
     static func page(for url: URL) -> UIViewController? {
         

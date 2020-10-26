@@ -17,16 +17,11 @@ class ArticleDetailViewController: UIViewController {
     }
 }
 
-extension ArticleDetailViewController: DPRouterPage {
-    static var pageURL: URL {
-        "sub.myhost.com/articles/detail"
-    }
+extension ArticleDetailViewController: DPRouterPageProvider {
     
     static func page(for url: URL) -> UIViewController? {
         let detailPage = ArticleDetailViewController(nibName: "ArticleDetailViewController", bundle: Bundle(for: ArticleDetailViewController.self))
         detailPage.navigationItem.title = "文章详情"
         return detailPage
-    }
-    
-    
+    }        
 }

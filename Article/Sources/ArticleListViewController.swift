@@ -25,11 +25,7 @@ class ArticleListViewController: UIViewController {
     }
 }
 
-extension ArticleListViewController: DPRouterPage {    
-        
-    static var pageURL: URL {
-        return "sub.myhost.com/articles"
-    }
+extension ArticleListViewController: DPRouterPageProvider {
     
     static func page(for url: URL) -> UIViewController? {
         

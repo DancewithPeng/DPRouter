@@ -13,14 +13,8 @@
 
 - (void)didLoad {
     [super didLoad];
-    
-    [DPRouter.sharedRouter registerPage:TopicListViewController.class];
-    
-//    [DPRouter.sharedRouter registerClosureBuilder:^id<DPRouterResource> _Nullable(NSURL * _Nonnull url) {
-//        TopicListViewController *topicPage = [[TopicListViewController alloc] initWithNibName:@"TopicListViewController" bundle:[NSBundle bundleForClass:TopicListViewController.class]];
-//        topicPage.title = @"话题";
-//        return topicPage;
-//    } forURL:@"sub.myhost.com/topics".URL];
+        
+    DPRoute(@"sub.myhost.com/topics".URL, TopicListViewController.class);
 }
 
 @end

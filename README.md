@@ -12,7 +12,7 @@ DPRouter支持**Swift Package**和**CocoaPods**
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/DancewithPeng/DPRouter.git", .upToNextMinor(from: "1.0.0"))
+    .package(url: "https://github.com/DancewithPeng/DPRouter.git", .upToNextMinor(from: "1.1.0"))
 ]
 ```
 
@@ -21,7 +21,7 @@ dependencies: [
 在`Podfile`文件中加入
 
 ```ruby
-pod 'DPUIKitRouter', '~> 1.0.0'
+pod 'DPUIKitRouter', '~> 1.1.0'
 ```
 
 ## 使用
@@ -31,11 +31,7 @@ pod 'DPUIKitRouter', '~> 1.0.0'
 首先需要在路由的目标页面遵循`DPRouterPage`协议，并实现协议中规定的方法
 
 ```swift
-extension ArticleDetailViewController: DPRouterPage {
-  	// 返回目标页面对应的URL
-    static var pageURL: URL {
-        "sub.myhost.com/articles/detail"
-    }
+extension ArticleDetailViewController: DPRouterPageProvider {
     
   	// 通过静态方法，返回URL对应的ViewController实例
     static func page(for url: URL) -> UIViewController? {
@@ -51,7 +47,7 @@ extension ArticleDetailViewController: DPRouterPage {
 其次在进行路由之前，需要先将页面注册到DPRouter中
 
 ```swift
-DPRouter.shared.register(ArticleDetailViewController.self)
+DPRoute("sub.myhost.com/articles/detail", ArticleDetailViewController.self)
 ```
 
 ### Step3

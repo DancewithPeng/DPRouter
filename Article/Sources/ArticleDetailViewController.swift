@@ -17,7 +17,7 @@ class ArticleDetailViewController: UIViewController {
     }
 }
 
-extension ArticleDetailViewController: DPRouterPageProvider {
+extension ArticleDetailViewController: Router.PageProvider {
     
     static func page(for url: URL) -> UIViewController? {
         let detailPage = ArticleDetailViewController(nibName: "ArticleDetailViewController", bundle: Bundle(for: ArticleDetailViewController.self))

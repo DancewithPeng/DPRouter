@@ -8,11 +8,12 @@
 #import <Foundation/Foundation.h>
 #import "DPRouterResource.h"
 #import "DPRouterResourceBuilder.h"
-#import "DPRouterImplement.h"
+#import "DPRouterResourceDespatcher.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 闭包资源构造器
+NS_SWIFT_NAME(Router.ClosureResourceBuilder)
 @interface DPRouterClosureResourceBuilder : NSObject <DPRouterResourceBuilder>
 
 /// 资源构造闭包
@@ -24,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// DPRouteClosureResourceBuilder对DPRouter的扩展
-@interface DPRouter (DPRouterClosureResourceBuilder)
+/// DPRouteClosureResourceBuilder对DPRouterResourceDespatcher的扩展
+@interface DPRouterResourceDespatcher (DPRouterClosureResourceBuilder)
 
 /// 注册闭包构造器器
 /// @param resourceBuildClosure 资源构造闭包

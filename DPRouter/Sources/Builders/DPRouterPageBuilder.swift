@@ -7,6 +7,6 @@
 
 import Foundation
 
-public func DPRoute(_ url: URL, _ pageType: AnyClass) {
-    DPRouter.shared.register(pageType, for: url)
+public func DPRoute(_ url: URL, _ pageProvider: Router.PageProvider.Type) {
+    Router.ResourceDespatcher.shared.register(pageProvider, for: url)
 }

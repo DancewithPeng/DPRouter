@@ -24,9 +24,9 @@
 
 @end
 
-#pragma mark - DPRouter (DPRouteClosureResourceBuilder)
+#pragma mark - DPRouterResourceDespatcher (DPRouteClosureResourceBuilder)
 
-@implementation DPRouter (DPRouterClosureResourceBuilder)
+@implementation DPRouterResourceDespatcher (DPRouterClosureResourceBuilder)
 
 - (void)registerClosureBuilder:(id<DPRouterResource>  _Nullable (^)(NSURL * _Nonnull))resourceBuildClosure
                         forURL:(NSURL *)url {

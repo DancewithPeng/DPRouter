@@ -7,11 +7,13 @@
 
 #import "DPRouterImplement.h"
 #import "NSURL+DPRouterConvenient.h"
+#import "DPRouterPageBuilder.h"
+#import "DPRouterShowOnCurrentPageRoutePolicy.h"
 
 @interface DPRouter ()
 
-/// 注册的构造器
-@property (nonatomic, strong) NSMutableDictionary<NSString *, id<DPRouterResourceBuilder>> *registeredBuilders;
+/// 注册的路由策略
+@property (nonatomic, strong) NSMutableDictionary<NSString *, id<DPRoutePolicy>> *registeredRoutePolicies;
 
 @end
 
@@ -19,16 +21,32 @@
 
 #pragma mark - Interfaces
 
-- (void)registerBuilder:(id<DPRouterResourceBuilder>)builder forURL:(NSURL *)url {
-    self.registeredBuilders[url.resourceName] = builder;
+- (void)registerRoutePolicy:(id<DPRoutePolicy>)routePolicy forURL:(NSURL *)url {
+    [self.registeredRoutePolicies setObject:routePolicy forKey:url.resourceName];
 }
 
-- (nullable id<DPRouterResource>)resourceForURL:(NSURL *)url {
-    id<DPRouterResourceBuilder> builder = self.registeredBuilders[url.resourceName];
-    if (builder == nil) {
-        return nil;
+- (BOOL)routeToURL:(NSURL *)url {
+    
+    id<DPRoutePolicy> routePolicy = [self.registeredRoutePolicies objectForKey:url.resourceName];
+    if (routePolicy == nil) {
+        routePolicy = self.defaultRoutePolicy;
     }
-    return [builder resourceForURL:url];
+    
+    // 没有目标页面的路由策略
+    if ([routePolicy respondsToSelector:@selector(routeWithURL:)]) {
+        return [routePolicy routeWithURL:url];
+    }
+    
+    // 带目标页面的路由策略
+    if ([routePolicy respondsToSelector:@selector(routeTargetPage:withURL:)]) {
+        UIViewController *targetPage = [DPRouterResourceDespatcher.sharedDespatcher pageForURL:url];
+        if (targetPage == nil) {
+            return NO;
+        }
+        return [routePolicy routeTargetPage:targetPage withURL:url];
+    }
+    
+    return NO;
 }
 
 #pragma mark - Getters
@@ -42,11 +60,18 @@
     return _router;
 }
 
-- (NSMutableDictionary<NSString *,id<DPRouterResourceBuilder>> *)registeredBuilders {
-    if (_registeredBuilders == nil) {
-        _registeredBuilders = [[NSMutableDictionary alloc] init];
+- (NSMutableDictionary<NSString *,id<DPRoutePolicy>> *)registeredRoutePolicies {
+    if (_registeredRoutePolicies == nil) {
+        _registeredRoutePolicies = [[NSMutableDictionary alloc] init];
     }
-    return _registeredBuilders;
+    return _registeredRoutePolicies;
+}
+
+- (id<DPRoutePolicy>)defaultRoutePolicy {
+    if (_defaultRoutePolicy == nil) {
+        _defaultRoutePolicy = [DPRouterShowOnCurrentPageRoutePolicy policy];
+    }
+    return _defaultRoutePolicy;
 }
 
 @end

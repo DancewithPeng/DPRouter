@@ -15,17 +15,18 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainTabBarController.viewControllers = []
-
-        guard let articlePage = DPRouter.shared.page(for: "https://sub.myhost.com/articles?nav=1&name=123&temp=") else {
+//        Router.shared.defaultRoutePolicy = Router.ShowOnCurrentPageRoutePolicy.policy()
+        Router.ResourceDespatcher.shared.defaultPageProvider = MyWebViewController.self
+        
+        guard let articlePage = Router.ResourceDespatcher.shared.page(for: "https://sub.myhost.com/articles?nav=1&name=123&temp=") else {
             return
         }
         
-        guard let questionPage = DPRouter.shared.page(for: "https://sub.myhost.com/questions?nav=1") else {
+        guard let questionPage = Router.ResourceDespatcher.shared.page(for: "https://sub.myhost.com/questions?nav=1") else {
             return
         }
         
-        guard let topicPage = DPRouter.shared.page(for: "https://sub.myhost.com/topics?nav=1") else {
+        guard let topicPage = Router.ResourceDespatcher.shared.page(for: "https://sub.myhost.com/topics?nav=1") else {
             return
         }
         

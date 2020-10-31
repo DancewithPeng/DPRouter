@@ -6,25 +6,30 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DPRouterResource.h"
-#import "DPRouterResourceBuilder.h"
+#import "DPRoutePolicy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// 路由器
+NS_SWIFT_NAME(Router)
 @interface DPRouter : NSObject
 
 /// 单例
 @property (nonatomic, readonly, class) DPRouter *sharedRouter;
 
-/// 注册构造器
-/// @param builder 资源构造器
-/// @param url 资源对应的URL
-- (void)registerBuilder:(id<DPRouterResourceBuilder>)builder forURL:(NSURL *)url;
+/// 默认的路由策略，如果没有单独为URL注册对应策略，则使用此策略进行路由。默认值是`DPRouterShowOnCurrentPageRoutePolicy`对象
+@property (nonatomic, strong) id<DPRoutePolicy> defaultRoutePolicy;
 
-/// 获取资源
-/// @param url 资源对应的URL
-- (nullable id<DPRouterResource>)resourceForURL:(NSURL *)url;
+/// 注册路由策略
+/// @param routePolicy 路由策略
+/// @param url 策略对应的URL
+- (void)registerRoutePolicy:(id<DPRoutePolicy>)routePolicy
+                     forURL:(NSURL *)url NS_SWIFT_NAME(register(_:for:));
+
+/// 路由到制定的URL
+/// @param url 页面对应的URL
+/// @return 如果路由器能处理此URL，则返回YES，不能处理则返回NO
+- (BOOL)routeToURL:(NSURL *)url;
 
 @end
 

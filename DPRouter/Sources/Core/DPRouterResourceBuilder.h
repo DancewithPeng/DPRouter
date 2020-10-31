@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 资源构造器
+NS_SWIFT_NAME(Router.ResourceBuilder)
 @protocol DPRouterResourceBuilder <NSObject>
 
 /// 返回URL对应的资源

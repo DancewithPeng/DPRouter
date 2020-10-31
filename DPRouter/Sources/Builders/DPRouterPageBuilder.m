@@ -6,36 +6,49 @@
 //
 
 #import "DPRouterPageBuilder.h"
+#import <objc/runtime.h>
+
+@interface DPRouterPageBuilder ()
+
+@end
 
 @implementation DPRouterPageBuilder
 
-- (instancetype)initWithPageType:(Class)pageType {
+- (instancetype)initWithPageProvider:(Class<DPRouterPageProvider>)pageProvider {
     if (self = [super init]) {
-        self.pageType = pageType;
+        self.pageProvider = pageProvider;
     }
     return self;
 }
 
 - (id<DPRouterResource>)resourceForURL:(NSURL *)url {
-    if ([self.pageType respondsToSelector:@selector(pageForURL:)] == NO) {
+    if ([self.pageProvider respondsToSelector:@selector(pageForURL:)] == NO) {
         return nil;
     }
-    return [self.pageType pageForURL:url];
+    return [self.pageProvider pageForURL:url];
 }
 
 @end
 
-@implementation DPRouter (DPRouterPageBuilder)
+@implementation DPRouterResourceDespatcher (DPRouterPageBuilder)
 
-- (void)registerPage:(Class)pageType forURL:(NSURL *)url {
+- (void)setDefaultPageProvider:(Class<DPRouterPageProvider>)defaultPageProvider {
+    objc_setAssociatedObject(self, "defaultPageProvider", defaultPageProvider, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (Class<DPRouterPageProvider>)defaultPageProvider {
+    return objc_getAssociatedObject(self, "defaultPageProvider");
+}
+
+- (void)registerPageProvider:(Class<DPRouterPageProvider>)pageProvider forURL:(NSURL *)url {
     
     // 如果没有遵循DPRouterPageProvider协议，则不进行注册
-    if ([pageType conformsToProtocol:@protocol(DPRouterPageProvider)] == NO) {
-        NSLog(@"pageType需要遵循`DPRouterPageProvider`协议");
+    if ([pageProvider conformsToProtocol:@protocol(DPRouterPageProvider)] == NO) {
+        NSLog(@"pageProvider需要遵循`DPRouterPageProvider`协议");
         return;
     }
     
-    DPRouterPageBuilder *pageBuilder = [[DPRouterPageBuilder alloc] initWithPageType:pageType];
+    DPRouterPageBuilder *pageBuilder = [[DPRouterPageBuilder alloc] initWithPageProvider:pageProvider];
     [self registerBuilder:pageBuilder forURL:url];
 }
 
@@ -43,6 +56,10 @@
     id<DPRouterResource> resource = [self resourceForURL:url];
     if ([resource isKindOfClass:UIViewController.class]) {
         return (UIViewController *)resource;
+    } else {
+        if (self.defaultPageProvider) {
+            return [self.defaultPageProvider pageForURL:url];
+        }
     }
     
     return nil;

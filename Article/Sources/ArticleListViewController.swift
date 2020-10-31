@@ -13,19 +13,15 @@ class ArticleListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "文章"
-        navigationItem.title = "文章列表"
+        navigationItem.title = "文章列表"        
     }
     
     @IBAction func detailButtonDidTap(_ sender: Any) {
-        guard let detailPage = DPRouter.shared.page(for: "sub.myhost.com/articles/detail") else {
-            return
-        }
-        
-        navigationController?.pushViewController(detailPage, animated: true)
+        Router.shared.route(to: "sub.myhost.com/articles/detail")
     }
 }
 
-extension ArticleListViewController: DPRouterPageProvider {
+extension ArticleListViewController: Router.PageProvider {
     
     static func page(for url: URL) -> UIViewController? {
         

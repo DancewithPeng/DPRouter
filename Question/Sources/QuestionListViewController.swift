@@ -17,7 +17,7 @@ class QuestionListViewController: UIViewController {
     }
 }
 
-extension QuestionListViewController: DPRouterPageProvider {        
+extension QuestionListViewController: Router.PageProvider {        
     
     static func page(for url: URL) -> UIViewController? {
         

@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 资源
+NS_SWIFT_NAME(Router.Resource)
 @protocol DPRouterResource <NSObject>
 
 @end

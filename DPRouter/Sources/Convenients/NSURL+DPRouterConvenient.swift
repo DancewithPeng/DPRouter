@@ -17,7 +17,6 @@ extension URL: ExpressibleByStringLiteral {
     }
 }
 
-/// 获取Query参数的便捷方法
 extension URL {
     
     /// 查询参数
@@ -37,5 +36,10 @@ extension URL {
         }
         
         return results
+    }
+    
+    /// 资源名称（host+path）
+    public var resourceName: String {
+        return "\(self.host ?? "")\(self.path)"
     }
 }

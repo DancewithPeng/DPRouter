@@ -42,6 +42,8 @@ class RootViewController: UIViewController {
         mainTabBarController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         mainTabBarController.didMove(toParent: self)
+        
+        print(URL("https://www.baidu.com/aaa/bbb/ccc?hello=world").resourceName)
     }
 }
 

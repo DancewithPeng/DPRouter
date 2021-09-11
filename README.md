@@ -4,6 +4,8 @@
 
 UIKit的路由工具
 
+
+
 ## 导入
 
 DPRouter支持**Swift Package**和**CocoaPods**
@@ -23,10 +25,12 @@ dependencies: [
 在`Podfile`文件中加入
 
 ```ruby
-pod 'DPUIKitRouter', '~> 1.2.0'
+pod 'DPUIKitRouter', '~> 1.3.0'
 ```
 
 > 因为`DPRouter`这个名字的Pod库已经存在，所以没有使用`DPRouter`作为Pod库的名称
+
+
 
 ## 使用
 
@@ -96,6 +100,26 @@ Router.shared.register(MyRoutePolicy.policy(), for: "sub.myhost.com/articles/det
 ```swift
 Router.shared.defaultRoutePolicy = ...
 ```
+
+
+
+## 设计理念
+
+希望DPRouter提供以下功能：
+
+- 根据URL跳转至指定的页面
+  - 根据URL获取对应的资源，页面是资源的一种
+    - 如何获取资源
+      - 生产资源
+        - 资源构造器
+          - 页面资源构造器
+          - 其他资源构造器
+      - 访问资源
+        - 资源访问器
+  - 指定跳转的策略
+    - 不同的页面可以指定不同的策略
+
+
 
 ## LICENSE
 

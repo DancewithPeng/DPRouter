@@ -19,7 +19,7 @@ class ArticleDetailViewController: UIViewController {
 
 extension ArticleDetailViewController: Router.PageProvider {
     
-    static func page(for url: URL) -> UIViewController? {
+    static func page(for url: URL) -> UIViewController? {        
         let detailPage = ArticleDetailViewController(nibName: "ArticleDetailViewController", bundle: Bundle(for: ArticleDetailViewController.self))
         detailPage.navigationItem.title = "文章详情"
         return detailPage

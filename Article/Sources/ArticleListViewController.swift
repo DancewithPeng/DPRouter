@@ -17,13 +17,13 @@ class ArticleListViewController: UIViewController {
     }
     
     @IBAction func detailButtonDidTap(_ sender: Any) {
-        Router.shared.route(to: "sub.myhost.com/articles/detail")
+        Router.shared.route(to: "sub.myhost.com/articles/detail")        
     }
 }
 
 extension ArticleListViewController: Router.PageProvider {
     
-    static func page(for url: URL) -> UIViewController? {
+    static func page(for url: URL) -> UIViewController? {                
         
         let articlePage = ArticleListViewController(nibName: "ArticleListViewController", bundle: Bundle(for: ArticleListViewController.self))
         

@@ -31,6 +31,13 @@ NS_SWIFT_NAME(Router)
 /// @return 如果路由器能处理此URL，则返回YES，不能处理则返回NO
 - (BOOL)routeToURL:(NSURL *)url;
 
+/// 路由到制定的URL
+/// @param url 页面对应的URL
+/// @param sourcePage 来源页面
+/// @return 如果路由器能处理此URL，则返回YES，不能处理则返回NO
+- (BOOL)routeToURL:(NSURL *)url
+          fromPage:(UIViewController * _Nullable)sourcePage NS_SWIFT_NAME(route(to:from:));
+
 @end
 
 NS_ASSUME_NONNULL_END

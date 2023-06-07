@@ -26,15 +26,32 @@
 }
 
 - (BOOL)routeToURL:(NSURL *)url {
-    
+    return [self routeToURL:url fromPage:nil];
+}
+
+- (BOOL)routeToURL:(NSURL *)url fromPage:(UIViewController *)sourcePage {
     id<DPRoutePolicy> routePolicy = [self.registeredRoutePolicies objectForKey:url.resourceName];
     if (routePolicy == nil) {
         routePolicy = self.defaultRoutePolicy;
+    }
+
+    // 没有目标页面的路由策略
+    if ([routePolicy respondsToSelector:@selector(routeWithURL:fromPage:)]) {
+        return [routePolicy routeWithURL:url fromPage:sourcePage];
     }
     
     // 没有目标页面的路由策略
     if ([routePolicy respondsToSelector:@selector(routeWithURL:)]) {
         return [routePolicy routeWithURL:url];
+    }
+    
+    // 带目标页面的路由策略
+    if ([routePolicy respondsToSelector:@selector(routeTargetPage:withURL:fromPage:)]) {
+        UIViewController *targetPage = [DPRouterResourceDespatcher.sharedDespatcher pageForURL:url];
+        if (targetPage == nil) {
+            return NO;
+        }
+        return [routePolicy routeTargetPage:targetPage withURL:url fromPage:sourcePage];
     }
     
     // 带目标页面的路由策略

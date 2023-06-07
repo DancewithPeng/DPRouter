@@ -23,6 +23,10 @@ NS_SWIFT_NAME(Router.ResourceDespatcher)
 /// @param url 资源对应的URL
 - (void)registerBuilder:(id<DPRouterResourceBuilder>)builder forURL:(NSURL *)url;
 
+/// 获取URL注册的Builder
+/// @param url 资源对应的URL
+- (id<DPRouterResourceBuilder> _Nullable)builderForURL:(NSURL *)url;
+
 /// 获取资源
 /// @param url 资源对应的URL
 - (nullable id<DPRouterResource>)resourceForURL:(NSURL *)url;

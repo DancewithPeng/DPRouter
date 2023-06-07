@@ -30,6 +30,10 @@
     self.registeredBuilders[url.resourceName] = builder;
 }
 
+- (id<DPRouterResourceBuilder>)builderForURL:(NSURL *)url {
+    return self.registeredBuilders[url.resourceName];
+}
+
 - (nullable id<DPRouterResource>)resourceForURL:(NSURL *)url {
     id<DPRouterResourceBuilder> builder = self.registeredBuilders[url.resourceName];
     if (builder == nil) {

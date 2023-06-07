@@ -57,23 +57,27 @@
     return [[DPRouterShowOnCurrentPageRoutePolicy alloc] init];
 }
 
-- (BOOL)routeTargetPage:(UIViewController *)targetPage withURL:(NSURL *)url {
+- (BOOL)routeTargetPage:(UIViewController *)targetPage withURL:(NSURL *)url fromPage:(UIViewController * _Nullable)sourcePage {
     
     UIViewController *currentPage;
     
-    if (@available(iOS 13.0, *)) {
-        UIScene *scene = [UIApplication.sharedApplication.connectedScenes anyObject];
-        if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
-            currentPage = [(id<UIWindowSceneDelegate>)scene.delegate window].rootViewController.DP_topestViewController;
-        } else {
-            if ([UIApplication.sharedApplication.delegate respondsToSelector:@selector(window)]) {
-                currentPage = UIApplication.sharedApplication.delegate.window.rootViewController.DP_topestViewController;
-            } else {
-                return NO;
-            }
-        }
+    if (sourcePage != nil) {
+        currentPage = sourcePage;
     } else {
-        currentPage = UIApplication.sharedApplication.delegate.window.rootViewController.DP_topestViewController;
+        if (@available(iOS 13.0, *)) {
+            UIScene *scene = [UIApplication.sharedApplication.connectedScenes anyObject];
+            if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
+                currentPage = [(id<UIWindowSceneDelegate>)scene.delegate window].rootViewController.DP_topestViewController;
+            } else {
+                if ([UIApplication.sharedApplication.delegate respondsToSelector:@selector(window)]) {
+                    currentPage = UIApplication.sharedApplication.delegate.window.rootViewController.DP_topestViewController;
+                } else {
+                    return NO;
+                }
+            }
+        } else {
+            currentPage = UIApplication.sharedApplication.delegate.window.rootViewController.DP_topestViewController;
+        }
     }
     
     if (currentPage == nil) {

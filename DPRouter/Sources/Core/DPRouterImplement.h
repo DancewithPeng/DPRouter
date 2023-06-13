@@ -26,6 +26,10 @@ NS_SWIFT_NAME(Router)
 - (void)registerRoutePolicy:(id<DPRoutePolicy>)routePolicy
                      forURL:(NSURL *)url NS_SWIFT_NAME(register(_:for:));
 
+/// 获取URL对应的注册策略对象
+/// @param url 对应的URL
+- (nullable id<DPRoutePolicy>)policyForURL:(NSURL * _Nullable)url;
+
 /// 路由到制定的URL
 /// @param url 页面对应的URL
 /// @return 如果路由器能处理此URL，则返回YES，不能处理则返回NO

@@ -25,12 +25,20 @@
     [self.registeredRoutePolicies setObject:routePolicy forKey:url.resourceName];
 }
 
+- (id<DPRoutePolicy>)policyForURL:(NSURL *)url {
+    if (url == nil || [url isKindOfClass:NSURL.class] == NO) {
+        return nil;
+    }
+    
+    return [self.registeredRoutePolicies objectForKey:url.resourceName];
+}
+
 - (BOOL)routeToURL:(NSURL *)url {
     return [self routeToURL:url fromPage:nil];
 }
 
 - (BOOL)routeToURL:(NSURL *)url fromPage:(UIViewController *)sourcePage {
-    id<DPRoutePolicy> routePolicy = [self.registeredRoutePolicies objectForKey:url.resourceName];
+    id<DPRoutePolicy> routePolicy = [self policyForURL:url];
     if (routePolicy == nil) {
         routePolicy = self.defaultRoutePolicy;
     }
